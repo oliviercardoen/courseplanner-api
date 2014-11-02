@@ -29,19 +29,11 @@ class CourseController extends RestController {
 	 */
 	public function create()
 	{
-		$raw  = $this->getRequest()->getBody();
-		$data = json_decode( $raw, true );
-
-		$course = new Course();
-		$course->id = (int) $data['id'];
-		$course->name = Input::safe( $data['name'] );
-		$course->code = Input::safe( $data['code'] );
-		$course->start_date = Input::safe( $data['start_date'] );
-		$course->end_date = Input::safe( $data['end_date'] );
-		$course->reference_document = Input::safe( $data['reference_document'] );
-		$course->save();
-
-		$this->render( $course );
+		$raw  = $this->request()->getBody();
+		$model = new Course();
+		$model->hydrate( json_decode( $raw, true ) );
+		$model->save();
+		$this->render( $model->as_array() );
 	}
 
 	/**
@@ -50,18 +42,14 @@ class CourseController extends RestController {
 	 */
 	public function update($id)
 	{
-		$raw  = $this->getRequest()->getBody();
-		$data = json_decode( $raw, true );
-
-		$course = Course::find( (int) $id );
-		$course->name = Input::safe( $data['name'] );
-		$course->code = Input::safe( $data['code'] );
-		$course->start_date = Input::safe( $data['start_date'] );
-		$course->end_date = Input::safe( $data['end_date'] );
-		$course->reference_document = Input::safe( $data['reference_document'] );
-		$course->save();
-
-		$this->render( $course );
+		$raw  = $this->request()->getBody();
+		$model = Course::find( (int) $id );
+		if ( empty( $model ) ) {
+			$model = new Course();
+		}
+		$model->hydrate( json_decode( $raw, true ) );
+		$model->save();
+		$this->render( $model->as_array() );
 	}
 
 	/**
@@ -70,9 +58,12 @@ class CourseController extends RestController {
 	 */
 	public function delete($id)
 	{
-		$this->render( array(
-			'deleted' => Course::find( (int) $id )->delete()
-		) );
+		$model = Course::find( (int) $id );
+		if ( !empty( $model ) ) {
+			// TODO: Breaks because related to curriculum (SQL Constraint).
+			$model->delete();
+			$this->render( $model->as_array() );
+		}
 	}
 
 }
