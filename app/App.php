@@ -5,21 +5,15 @@ use CoursePlanner\UserModule\UserModule;
 use Octopix\Selene\Application\Application;
 
 /**
+ * App specific logic.
  * Class App
  * @package App
  */
 class App extends Application {
 
 	/**
-	 * @param array $args
-	 */
-	public function __construct( $args = array() )
-	{
-		parent::__construct( $args );
-	}
-
-	/**
-	 * A static instance of a user model. Handle data from the logged in user.
+	 * Create a static instance of a user model to be used across the whole app. This instance
+	 * manage data from the logged in user during session.
 	 * @return \CoursePlanner\UserModule\Model\User
 	 */
 	public static function user()
