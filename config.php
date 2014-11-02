@@ -12,7 +12,7 @@ $config = array(
 			'name'      => 'BaseModule',
 			'namespace' => 'CoursePlanner\BaseModule',
 			'resources' => array(
-				'/ingredients/' => 'IngredientController'
+				'/courses/' => 'CourseController'
 			)
 		),
 		array(

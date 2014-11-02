@@ -1,34 +1,31 @@
 <?php
 namespace CoursePlanner\BaseModule\Controller;
 
-use Octopix\Selene\Form\Input\Input;
 use Octopix\Selene\Mvc\Controller\Rest\RestController;
 use CoursePlanner\BaseModule\Model\Course;
+use Octopix\Selene\Mvc\Model\ModelArray;
 
 class CourseController extends RestController {
 
 	/**
-	 * Handle the index action.
-	 * Usually, controller will fetch entities and render a list.
+	 *
 	 */
 	public function index()
 	{
-		$this->render( Course::all() );
+		$this->render( ModelArray::each( Course::all() ) );
 	}
 
 	/**
-	 * Handle the show action.
-	 * Usually, controller will fetch one record and render the entity.
-	 * @param array $vars
+	 * @param $id
+	 * @return mixed|void
 	 */
 	public function show($id)
 	{
-		$this->render( Course::find( (int) $id ) );
+		$this->render( ModelArray::one( Course::find( (int) $id ) ) );
 	}
 
 	/**
-	 * Handle the save action.
-	 * Usually, controller will persist the current entity.
+	 *
 	 */
 	public function create()
 	{
@@ -48,8 +45,8 @@ class CourseController extends RestController {
 	}
 
 	/**
-	 * Handle the save action.
-	 * Usually, controller will persist the current entity.
+	 * @param $id
+	 * @return mixed|void
 	 */
 	public function update($id)
 	{
@@ -68,8 +65,8 @@ class CourseController extends RestController {
 	}
 
 	/**
-	 * Handle the delete action [POST|DELETE].
-	 * Usually, controller will delete the entity.
+	 * @param $id
+	 * @return mixed|void
 	 */
 	public function delete($id)
 	{
