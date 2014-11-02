@@ -1,7 +1,23 @@
 <?php
-define( 'TEMPLATES_PATH',   dirname( __FILE__ ) . '/app/views' );
-define( 'ASSETS_PATH',      'assets' );
-define( 'DB_HOST',          'localhost');
-define( 'DB_NAME',          'php_courseplanner');
-define( 'DB_USER_NAME',     'root');
-define( 'DB_USER_PASSWORD', 'root');
+$config = array(
+	'db' => array(
+		'host'     => 'localhost',
+		'name'     => 'php_courseplanner',
+		'username' => 'root',
+		'password' => 'root'
+	),
+	'salt' => sha1( 'PHP_COURSEPLANNER_20141102' ),
+	'modules' => array(
+		array(
+			'name'      => 'BaseModule',
+			'namespace' => 'CoursePlanner\BaseModule',
+			'resources' => array(
+				'/ingredients/' => 'IngredientController'
+			)
+		),
+		array(
+			'name'      => 'UserModule',
+			'namespace' => 'CoursePlanner\UserModule'
+		),
+	)
+);
