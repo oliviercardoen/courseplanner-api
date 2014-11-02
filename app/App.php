@@ -37,9 +37,7 @@ class App extends Application {
 		$this->router->get( '/', function() {
 			header( 'Content-type: application/json' );
 			echo json_encode( array(
-				'message' => array(
-					'You are not authorized to view this resource.'
-				)
+				'message' => 'You are not authorized to view this resource.'
 			) );
 			exit;
 		});
@@ -48,9 +46,7 @@ class App extends Application {
 			$user = self::user();
 			header( 'Content-type: application/json' );
 			echo json_encode( array(
-				'message' => array(
-					'You are not authorized to view this resource.'
-				)
+				'message' => 'You are not authorized to view this resource.'
 			) );
 			exit;
 		});
