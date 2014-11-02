@@ -1,0 +1,16 @@
+{
+    "require": {
+        "slim/slim": "2.4.*",
+        "anahkiasen/underscore-php": "1.2.3"
+    },
+    "config": {
+        "vendor-dir": "vendor"
+    },
+    "autoload": {
+        "psr-4": {
+            "Octopix\\": "vendor/octopix/",
+            "CoursePlanner\\": "src/",
+            "App\\": "app/"
+        }
+    }
+}
