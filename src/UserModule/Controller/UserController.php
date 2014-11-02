@@ -1,13 +1,11 @@
 <?php
-namespace CoursePlanner\AuthenticationModule\Controller;
+namespace CoursePlanner\UserModule\Controller;
 
 use App\App;
-use CoursePlanner\AuthenticationModule\Model\User;
-use CoursePlanner\BaseModule\Model\Curriculum;
+use CoursePlanner\UserModule\Model\User;
 use Octopix\Selene\Form\Input\Input;
 use Octopix\Selene\Mvc\Controller\Controller;
 use Octopix\Selene\Mvc\View\View;
-use CoursePlanner\BaseModule\Model\Course;
 
 class UserController extends Controller {
 
@@ -15,7 +13,7 @@ class UserController extends Controller {
 	 * Handle the authenticate action.
 	 * Authenticate user from given email and password.
 	 */
-	public function authenticateAction()
+	public function login()
 	{
 		$user = new User();
 		$user->email = Input::safe( $this->getRequest()->post('user_email') );
@@ -43,7 +41,7 @@ class UserController extends Controller {
 	 * Handle the logout action.
 	 * Delete the current session and redirect to login form.
 	 */
-	public function logoutAction()
+	public function logout()
 	{
 		App::user()->logout();
 		$this->render( View::make( 'users/forms/login', array(
@@ -51,7 +49,10 @@ class UserController extends Controller {
 		) ) );
 	}
 
-	public function profileAction()
+	/**
+	 *
+	 */
+	public function profile()
 	{
 		$this->render( View::make( 'users/show', array(
 			'title'  => App::user()->fullname(),
@@ -60,16 +61,10 @@ class UserController extends Controller {
 	}
 
 	/**
-	 * Handle the delete action.
-	 * Usually, controller will delete the entity.
-	 */
-	public function deleteAction() {}
-
-	/**
 	 * Handle the index action.
 	 * Usually, controller will fetch entities and render a list.
 	 */
-	public function indexAction()
+	public function index()
 	{
 		$this->render( View::make( 'users/forms/register' , array(
 			'title'   => 'Nouvelle inscription pour Course Planner'
@@ -77,31 +72,10 @@ class UserController extends Controller {
 	}
 
 	/**
-	 * Handle the new action.
-	 * Usually, the controller will display an empty form to create a new
-	 * instance of a model and store in the database.
-	 */
-	public function newAction() {}
-
-	/**
-	 * Handle the show action.
-	 * Usually, controller will fetch one record and render the entity.
-	 * @param array $vars
-	 */
-	public function showAction($id) {}
-
-	/**
-	 * Handle the edit action.
-	 * Usually, controller will fetch one record, render the entity
-	 * and the form to edit the rendered entity.
-	 */
-	public function editAction($id) {}
-
-	/**
 	 * Handle the save action.
 	 * Persist new user to perform registration.
 	 */
-	public function saveAction()
+	public function register()
 	{
 		$message = 'Votre inscription n\'a pas &eacute;t&eacute; enregistr&eacute; car %s.';
 
