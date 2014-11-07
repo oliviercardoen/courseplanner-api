@@ -2,14 +2,18 @@
 namespace CoursePlanner\BaseModule\Model;
 
 use Octopix\Selene\Mvc\Model\Model;
+use Octopix\Selene\Mvc\Model\ModelArray;
 
 class Course extends Model {
 
-	public static $_table = 'course';
+	public static $_table_use_short_name = true;
+
+	protected $curriculums;
 
 	public function hydrate( $data )
 	{
 		if ( !empty( $data ) ) {
+			exit( print_r( $data, true ));
 			if ( isset( $data->id ) ) {
 				$this->id = (int) $data->id;
 			}
@@ -20,6 +24,29 @@ class Course extends Model {
 			$this->code               = $data->code;
 			$this->lesson_number      = $data->lesson_number;
 		}
+	}
+
+	public function as_array()
+	{
+		return array_merge( parent::as_array(), array(
+			'curriculums' => ModelArray::each( $this->curriculums() )
+		) );
+	}
+
+	public function curriculums()
+	{
+		if ( !isset( $this->curriculums ) ) {
+			$orm = $this->has_many_through( 'CoursePlanner\BaseModule\Model\Curriculum', 'CourseCurriculum' );
+			$this->curriculums = $orm->find_many();
+		}
+		return $this->curriculums;
+	}
+
+	public function delete()
+	{
+		$orm = $this->has_many( 'CoursePlanner\BaseModule\Model\CourseCurriculum' );
+		$orm->delete_many();
+		parent::delete();
 	}
 
 }
