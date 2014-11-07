@@ -5,7 +5,7 @@ use CoursePlanner\UserModule\UserModule;
 use Octopix\Selene\Application\Application;
 
 /**
- * App specific logic.
+ * Define application specific logic.
  * Class App
  * @package App
  */
@@ -21,6 +21,15 @@ class App extends Application {
 		return UserModule::user();
 	}
 
+	public function render_message( $message )
+	{
+		header( 'Content-type: application/json' );
+		echo json_encode( array(
+			'message' => $message
+		) );
+		exit;
+	}
+
 	/**
 	 * Register routes that have not been dynamically defined based on the config.php
 	 * file.
@@ -29,30 +38,16 @@ class App extends Application {
 	{
 		/* Index route */
 		$this->router->get( '/', function() {
-			header( 'Content-type: application/json' );
-			echo json_encode( array(
-				'message' => 'You are not authorized to view this resource.'
-			) );
-			exit;
+			$this->render_message( 'You are not authorized to view this resource.' );
 		});
 
 		$this->router->post( '/', function() {
-			$user = self::user();
-			header( 'Content-type: application/json' );
-			echo json_encode( array(
-				'message' => 'You are not authorized to view this resource.'
-			) );
-			exit;
+			$this->render_message( 'You are not authorized to view this resource.' );
 		});
 
 		/* Not found handler */
 		$this->router->notFound( function() {
-			echo json_encode( array(
-				'message' => array(
-					'This resource does not exist or has been moved permanently.'
-				)
-			) );
-			exit;
+			$this->render_message( 'This resource does not exist or has been moved permanently.' );
 		});
 	}
 
