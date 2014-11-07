@@ -1,8 +1,10 @@
 <?php
 namespace CoursePlanner\BaseModule\Controller;
 
-class CourseController extends Controller {
+use Octopix\Selene\Mvc\Controller\Rest\RestController;
 
-	private static $_model_class = 'CoursePlanner\BaseModule\Model\Course';
+class CourseController extends RestController {
+
+	protected static $_model_class = 'CoursePlanner\BaseModule\Model\Course';
 
 }

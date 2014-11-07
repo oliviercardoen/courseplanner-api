@@ -12,8 +12,13 @@ $config = array(
 			'name'      => 'BaseModule',
 			'namespace' => 'CoursePlanner\BaseModule',
 			'resources' => array(
-				'/courses/'     => 'CourseController',
-				'/curriculums/' => 'CurriculumController'
+				'/courses/'          => 'CourseController',
+				'/curriculums/'      => 'CurriculumController',
+				'/schools/'          => 'SchoolController',
+				'/school-locations/' => 'SchoolLocationController',
+				'/countries/'        => 'CountryController',
+				'/timeslots/'        => 'TimeslotController',
+				'/addresses/'        => 'AddressController'
 			)
 		),
 		array(
