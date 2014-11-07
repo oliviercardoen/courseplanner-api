@@ -10,7 +10,11 @@ class BaseModule extends ApplicationModule {
 	 */
 	public function run()
 	{
-		// TODO: Implement run() method.
+		// TODO: Implement schools/:school_id/locations GET route.
+		// TODO: Implement schools/:school_id/locations/:id GET route.
+		// TODO: Implement schools/:school_id/locations POST route.
+		// TODO: Implement schools/:school_id/locations/:id PUT route.
+		// TODO: Implement schools/:school_id/locations/:id DELETE route.
 	}
 
 
