@@ -6,8 +6,6 @@ use Octopix\Selene\Mvc\Model\ModelArray;
 
 class Course extends Model {
 
-	public static $_table_use_short_name = true;
-
 	protected $curriculums;
 
 	public function hydrate( $data )
@@ -29,7 +27,7 @@ class Course extends Model {
 	public function as_array()
 	{
 		return array_merge( parent::as_array(), array(
-			'curriculums' => ModelArray::each( $this->curriculums() )
+			'curriculums' => Model::as_arrays( $this->curriculums() )
 		) );
 	}
 

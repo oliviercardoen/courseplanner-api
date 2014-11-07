@@ -5,9 +5,6 @@ use Octopix\Selene\Mvc\Model\Model;
 
 class Curriculum extends Model {
 
-	//public static $_table = 'curriculum';
-	public static $_table_use_short_name = true;
-
 	public function hydrate( $data )
 	{
 
