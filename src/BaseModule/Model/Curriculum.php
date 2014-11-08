@@ -7,7 +7,11 @@ class Curriculum extends Model {
 
 	public function hydrate( $data )
 	{
-
+		if ( !empty( $data ) ) {
+			$this->name        = $data['name'];
+			$this->code        = $data['code'];
+			$this->timeslot_id = $data['timeslot_id'];
+		}
 	}
 
 	public function courses()
